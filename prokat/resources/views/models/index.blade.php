@@ -1,0 +1,58 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container py-4 px-3 mx-auto">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Комментарий</th>
+                <th scope="col">Название</th>
+                <th scope="col">Тип</th>
+                <th scope="col">Первое фото</th>
+{{--                <th scope="col">Второе фото</th>--}}
+{{--                <th scope="col">Третье фото</th>--}}
+{{--                <th scope="col">Первое видео</th>--}}
+{{--                <th scope="col">Второе видео</th>--}}
+{{--                <th scope="col">Третье видео</th>--}}
+                <th scope="col">Первое описание</th>
+{{--                <th scope="col">Второе описание</th>--}}
+{{--                <th scope="col">Третье описание</th>--}}
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($models as $model)
+                <tr>
+                    <td>{{ $model->comment }}</td>
+                    <td>{{ $model->name }}</td>
+                    <td>{{ $model->type }}</td>
+                    <td>{{ $model->photo1 }}</td>
+{{--                    <td>{{ $model->photo2 }}</td>--}}
+{{--                    <td>{{ $model->photo3 }}</td>--}}
+{{--                    <td>{{ $model->video1 }}</td>--}}
+{{--                    <td>{{ $model->video2 }}</td>--}}
+{{--                    <td>{{ $model->video3 }}</td>--}}
+                    <td>{{ $model->description1 }}</td>
+{{--                    <td>{{ $model->description2 }}</td>--}}
+{{--                    <td>{{ $model->description3 }}</td>--}}
+                    <td>
+                        <a class="btn btn-primary" href="{{ route('models.edit', ['model' => $model]) }}">Редактировать</a>
+                        <form action="{{route('models.destroy', ['model' => $model])}}" method="post">
+                            <button class="btn btn-danger">Удалить</button>
+                            @method('DELETE')
+                        </form>
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary"
+                           href="{{ route('models.pricelists', ['model' => $model]) }}">
+                            Прайслисты
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{{ route('models.create') }}">Создать</a>
+    </div>
+@endsection
