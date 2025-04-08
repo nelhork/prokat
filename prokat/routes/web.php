@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\MovementController;
@@ -11,7 +12,8 @@ use App\Http\Controllers\StockController;
 use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',  [OrderController::class, 'index'])->name('home');
+Route::get('/',  [HomeController::class, 'index'])->name('home');
+Auth::routes();
 
 Route::get('stocks', [StockController::class, 'index'])->name('stocks.index');
 Route::get('stocks/create', [StockController::class, 'create'])->name('stocks.create');
