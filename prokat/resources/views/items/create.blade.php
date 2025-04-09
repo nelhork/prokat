@@ -11,11 +11,12 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('items.store')}}" method="post" class="needs-validation">
+        <form action="{{route('items.store')}}" method="post" class="needs-validation" enctype="multipart/form-data">
             @include('items.form', [
                 'item' => $item,
                 'models' => $models,
-                'stocks' => $stocks
+                'stocks' => $stocks,
+                'showPhotos' => false
             ])
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>

@@ -23,7 +23,9 @@ class StoreItemRequest extends FormRequest
     {
         return [
             'comment' => 'required|string|max:255',
-            'photo1' => 'required|string|max:255',
+            'photo1' => 'image',
+            'photo2' => 'image',
+            'photo3' => 'image',
             'status' => 'required|string|max:255',
             'model_id' => 'required|exists:models,id',
             'stock_id' => 'required|exists:stocks,id',

@@ -7,8 +7,6 @@
             <tr>
                 <th scope="col">Комментарий</th>
                 <th scope="col">Фото 1</th>
-                <th scope="col">Фото 2</th>
-                <th scope="col">Фото 3</th>
                 <th scope="col">Статус</th>
                 <th scope="col">Модель</th>
                 <th scope="col">Склад</th>
@@ -19,9 +17,11 @@
             @foreach($items as $item)
                 <tr>
                     <td>{{ $item->comment }}</td>
-                    <td>{{ $item->photo1 }}</td>
-                    <td>{{ $item->photo2 }}</td>
-                    <td>{{ $item->photo3 }}</td>
+                    <td>
+                        <img class="img-fluid" style="max-width: 100px" src="{{$item->photo1Url()}}" alt=""/>
+                        <img class="img-fluid" style="max-width: 100px" src="{{$item->photo2Url()}}" alt=""/>
+                        <img class="img-fluid" style="max-width: 100px" src="{{$item->photo3Url()}}" alt=""/>
+                    </td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->model->name }}</td>
                     <td>{{ $item->stock->name }}</td>

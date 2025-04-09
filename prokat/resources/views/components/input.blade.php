@@ -1,7 +1,7 @@
 <label for="{{$id}}" class="form-label">{{$title}}</label>
 @if(!isset($tag))
     @php
-        $tag = 'input';
+        $tag = $tag ?? 'input';
     @endphp
 @endif
 @if($tag === 'input')
@@ -11,7 +11,9 @@
         class="form-control @error($name) is-invalid @enderror"
         id="{{$id}}"
         maxlength="255"
-        value="{{old($name, $value)}}"
+        @if ($type !== 'file')
+            value="{{old($name, $value)}}"
+        @endif
     >
 @else
     <textarea

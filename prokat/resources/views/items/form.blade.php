@@ -1,15 +1,26 @@
 @php
     $fields = [
         ['id' => 'comment', 'title' => 'Комментарий', 'type' => 'text'],
-        ['id' => 'photo1', 'title' => 'Фото 1', 'type' => 'text'],
-        ['id' => 'photo2', 'title' => 'Фото 2', 'type' => 'text'],
-        ['id' => 'photo3', 'title' => 'Фото 3', 'type' => 'text'],
+        ['id' => 'photo1', 'title' => 'Фото 1', 'type' => 'file'],
+        ['id' => 'photo2', 'title' => 'Фото 2', 'type' => 'file'],
+        ['id' => 'photo3', 'title' => 'Фото 3', 'type' => 'file'],
         ['id' => 'status', 'title' => 'Статус', 'type' => 'text']
     ];
 @endphp
 
 @foreach ($fields as $field)
     <div class="mb-3">
+        @if ($showPhotos)
+            @if ($field['id'] === 'photo1')
+                <img class="img-fluid d-block mb-3" style="max-width: 100px" src="{{$item->photo1Url()}}" />
+            @endif
+            @if ($field['id'] === 'photo2')
+                <img class="img-fluid d-block mb-3" style="max-width: 100px" src="{{$item->photo2Url()}}" />
+            @endif
+            @if ($field['id'] === 'photo3')
+                <img class="img-fluid d-block mb-3" style="max-width: 100px" src="{{$item->photo3Url()}}" />
+            @endif
+        @endif
         @include('components.input', [
             'id' => $field['id'],
             'title' => $field['title'],
