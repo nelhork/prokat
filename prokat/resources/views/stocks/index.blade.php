@@ -5,26 +5,27 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Название</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Комментарий</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             @foreach($stocks as $stock)
                 <tr>
-                    <th scope="row">{{ $stock->id }}</th>
                     <td>{{ $stock->name }}</td>
                     <td>{{ $stock->address }}</td>
                     <td>{{ $stock->comment }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('stocks.edit', ['stock' => $stock]) }}">Редактировать</a>
-                        <form action="{{route('stocks.destroy', ['stock' => $stock])}}" method="post">
-                            <button class="btn btn-danger">Удалить</button>
-                            @method('DELETE')
-                        </form>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary" href="{{ route('stocks.edit', ['stock' => $stock]) }}"><i class="bi bi-pencil"></i></a>
+                            <form action="{{route('stocks.destroy', ['stock' => $stock])}}" method="post">
+                                <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                @method('DELETE')
+                            </form>
+                        </div>
+
                     </td>
                 </tr>
             @endforeach

@@ -22,18 +22,20 @@
                     <td>{{ $item['period_min'] }}</td>
                     <td>{{ $item['period_max'] }}</td>
                     <td>
-                        <a
-                            class="btn btn-primary"
-                            href="{{ route('models.pricelists.edit', [
+                        <div class="d-flex gap-1">
+                            <a
+                                class="btn btn-primary"
+                                href="{{ route('models.pricelists.edit', [
                                     'model' => $model['id'],
                                     'pricelist' => $item['id']
                                 ]) }}"
-                        >Редактировать
-                        </a>
-                        <form action="{{route('models.pricelists.destroy', ['pricelist' => $item, 'model' => $model])}}" method="post">
-                            <button class="btn btn-danger">Удалить</button>
-                            @method('DELETE')
-                        </form>
+                            ><i class="bi bi-pencil"></i>
+                            </a>
+                            <form action="{{route('models.pricelists.destroy', ['pricelist' => $item, 'model' => $model])}}" method="post">
+                                <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                @method('DELETE')
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

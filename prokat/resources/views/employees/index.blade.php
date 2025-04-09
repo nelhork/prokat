@@ -24,11 +24,13 @@
                     <td>{{ $employee['phone3'] }}</td>
                     <td>{{ $employee['status'] }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('employees.edit', ['employee' => $employee]) }}">Редактировать</a>
-                        <form action="{{route('employees.destroy', ['employee' => $employee])}}" method="post">
-                            <button class="btn btn-danger">Удалить</button>
-                            @method('DELETE')
-                        </form>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary" href="{{ route('employees.edit', ['employee' => $employee]) }}"><i class="bi bi-pencil"></i></a>
+                            <form action="{{route('employees.destroy', ['employee' => $employee])}}" method="post">
+                                <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                @method('DELETE')
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

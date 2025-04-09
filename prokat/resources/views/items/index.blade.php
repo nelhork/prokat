@@ -26,11 +26,13 @@
                     <td>{{ $item->model->name }}</td>
                     <td>{{ $item->stock->name }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('items.edit', ['item' => $item]) }}">Редактировать</a>
-                        <form action="{{route('items.destroy', ['item' => $item])}}" method="post">
-                            <button class="btn btn-danger">Удалить</button>
-                            @method('DELETE')
-                        </form>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary" href="{{ route('items.edit', ['item' => $item]) }}"><i class="bi bi-pencil"></i></a>
+                            <form action="{{route('items.destroy', ['item' => $item])}}" method="post">
+                                <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                @method('DELETE')
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

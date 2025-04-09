@@ -84,17 +84,19 @@
                         <td>{{ $order->giverStock->address }}</td>
                         <td>{{ $order->takerStock->address }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('orders.edit', $order) }}"
-                               style="margin-bottom: 10px;">Редактировать</a>
-                            <a class="btn btn-primary" href="{{ route('orders.view', $order) }}">
-                                @if($order['status_id'] === 1)
-                                    Выдать
-                                @elseif($order['status_id'] === 2)
-                                    Забрать
-                                @else
-                                    Посмотреть
-                                @endif
-                            </a>
+                            <div class="d-flex gap-1">
+                                <a class="btn btn-primary" href="{{ route('orders.edit', $order) }}">
+                                    <i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-primary" href="{{ route('orders.view', $order) }}">
+                                    @if($order['status_id'] === 1)
+                                        Выдать
+                                    @elseif($order['status_id'] === 2)
+                                        Забрать
+                                    @else
+                                        Посмотреть
+                                    @endif
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

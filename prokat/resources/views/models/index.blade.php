@@ -9,11 +9,11 @@
                 <th scope="col">Название</th>
                 <th scope="col">Тип</th>
                 <th scope="col">Первое фото</th>
-                <th scope="col">Второе фото</th>
-                <th scope="col">Третье фото</th>
-                <th scope="col">Первое видео</th>
-                <th scope="col">Второе видео</th>
-                <th scope="col">Третье видео</th>
+{{--                <th scope="col">Второе фото</th>--}}
+{{--                <th scope="col">Третье фото</th>--}}
+{{--                <th scope="col">Первое видео</th>--}}
+{{--                <th scope="col">Второе видео</th>--}}
+{{--                <th scope="col">Третье видео</th>--}}
                 <th scope="col">Первое описание</th>
 {{--                <th scope="col">Второе описание</th>--}}
 {{--                <th scope="col">Третье описание</th>--}}
@@ -30,37 +30,37 @@
                     <td>
                         <img class="img-fluid" style="max-width: 100px" src="{{$model->photo1Url()}}" alt=""/>
                     </td>
-                    <td>
-                        <img class="img-fluid" style="max-width: 100px" src="{{$model->photo2Url()}}" alt=""/>
-                    </td>
-                    <td>
-                        <img class="img-fluid" style="max-width: 100px" src="{{$model->photo3Url()}}" alt=""/>
-                    </td>
-                    <td>
-                    <td>
-                        <video controls class="img-fluid" style="max-width: 100px" src="{{$model->video1Url()}}"></video>
-                    </td>
-                    <td>
-                        <video controls class="img-fluid" style="max-width: 100px" src="{{$model->video2Url()}}"></video>
-                    </td>
-                    <td>
-                        <video controls class="img-fluid" style="max-width: 100px" src="{{$model->video3Url()}}"></video>
-                    </td>
+{{--                    <td>--}}
+{{--                        <img class="img-fluid" style="max-width: 100px" src="{{$model->photo2Url()}}" alt=""/>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <img class="img-fluid" style="max-width: 100px" src="{{$model->photo3Url()}}" alt=""/>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                    <td>--}}
+{{--                        <video controls class="img-fluid" style="max-width: 100px" src="{{$model->video1Url()}}"></video>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <video controls class="img-fluid" style="max-width: 100px" src="{{$model->video2Url()}}"></video>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <video controls class="img-fluid" style="max-width: 100px" src="{{$model->video3Url()}}"></video>--}}
+{{--                    </td>--}}
                     <td>{{ $model->description1 }}</td>
 {{--                    <td>{{ $model->description2 }}</td>--}}
 {{--                    <td>{{ $model->description3 }}</td>--}}
                     <td>
-                        <a class="btn btn-primary" href="{{ route('models.edit', ['model' => $model]) }}">Редактировать</a>
-                        <form action="{{route('models.destroy', ['model' => $model])}}" method="post">
-                            <button class="btn btn-danger">Удалить</button>
-                            @method('DELETE')
-                        </form>
-                    </td>
-                    <td>
-                        <a class="btn btn-secondary"
-                           href="{{ route('models.pricelists', ['model' => $model]) }}">
-                            Прайслисты
-                        </a>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary" href="{{ route('models.edit', ['model' => $model]) }}"><i class="bi bi-pencil"></i></a>
+                            <form action="{{route('models.destroy', ['model' => $model])}}" method="post">
+                                <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                @method('DELETE')
+                            </form>
+                            <a class="btn btn-secondary"
+                               href="{{ route('models.pricelists', ['model' => $model]) }}">
+                                Прайслисты
+                            </a>
+                        </div>
                     </td>
                 </tr>
             @endforeach
