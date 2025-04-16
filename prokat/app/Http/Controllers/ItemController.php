@@ -19,7 +19,7 @@ class ItemController extends BaseController
 
     public function index()
     {
-        return view('items.index', ['items' => Item::with(['model', 'stock'])->get()]);
+        return view('items.index', ['items' => Item::with(['model', 'stock'])->paginate()]);
     }
 
     public function create()

@@ -14,5 +14,10 @@
     "A fresh verification link has been sent to your email address.": "Свежая ссылка для подтверждения была отправлена на вашу электронную почту.",
     "Before proceeding, please check your email for a verification link.": "Прежде чем продолжить, пожалуйста, проверьте свою электронную почту на наличие ссылки для подтверждения.",
     "If you did not receive the email": "Если вы не получили письмо",
-    "click here to request another": "нажмите здесь, чтобы запросить другое"
+    "click here to request another": "нажмите здесь, чтобы запросить другое",
+    "Showing": "Показаны записи от",
+    "to": "до",
+    "of": "(всего",
+    "results": "результатов)"
+
 }

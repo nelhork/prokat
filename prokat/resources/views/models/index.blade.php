@@ -66,6 +66,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $models->links() }}
         <a class="btn btn-primary" href="{{ route('models.create') }}">Создать</a>
     </div>
 @endsection

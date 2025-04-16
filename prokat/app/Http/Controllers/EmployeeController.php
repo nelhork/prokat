@@ -11,7 +11,7 @@ class EmployeeController extends BaseController
 {
     public function index()
     {
-        return view('employees.index', ['employees' => Employee::all()]);
+        return view('employees.index', ['employees' => Employee::paginate()]);
     }
 
     public function create()

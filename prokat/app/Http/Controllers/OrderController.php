@@ -72,7 +72,7 @@ class OrderController extends BaseController
                 }
             });
         }
-        $orders = $orderQuery->with(['status', 'giver', 'taker', 'giverStock', 'takerStock', 'client'])->get();
+        $orders = $orderQuery->with(['status', 'giver', 'taker', 'giverStock', 'takerStock', 'client'])->paginate();
 
         return view('orders.index', compact('orders'));
     }

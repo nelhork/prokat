@@ -31,6 +31,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $stocks->links() }}
         <a class="btn btn-primary" href="{{ route('stocks.create') }}">Создать</a>
     </div>
 @endsection

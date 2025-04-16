@@ -103,6 +103,7 @@
                 </tbody>
             </table>
         @endif
+        {{ $orders->links() }}
         <a class="btn btn-primary" href="{{ route('orders.create') }}">Новый заказ</a>
     </div>
 @endsection

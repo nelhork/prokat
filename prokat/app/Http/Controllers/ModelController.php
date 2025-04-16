@@ -18,7 +18,7 @@ class ModelController extends BaseController
 
     public function index()
     {
-        return view('models.index', ['models' => ProkatModel::all()]);
+        return view('models.index', ['models' => ProkatModel::paginate()]);
     }
 
     public function create()

@@ -12,7 +12,7 @@ class StockController extends BaseController
 {
     public function index()
     {
-        return view('stocks.index', ['stocks' => Stock::all()]);
+        return view('stocks.index', ['stocks' => Stock::paginate()]);
     }
 
     public function create()

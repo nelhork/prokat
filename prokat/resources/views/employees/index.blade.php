@@ -36,6 +36,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $employees->links() }}
         <a class="btn btn-primary" href="{{ route('employees.create') }}">Создать</a>
     </div>
 @endsection

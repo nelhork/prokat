@@ -13,6 +13,6 @@ class MovementController extends BaseController
 {
     public function index()
     {
-        return view('movements.index', ['movements' => Movement::with(['item.model', 'fromStock', 'toStock'])->get()]);
+        return view('movements.index', ['movements' => Movement::with(['item.model', 'fromStock', 'toStock'])->paginate()]);
     }
 }
