@@ -17,3 +17,13 @@
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
+
+table th, table td
+{
+    text-align: center;
+}
+
+.d-flex
+{
+    justify-content: center;
+}

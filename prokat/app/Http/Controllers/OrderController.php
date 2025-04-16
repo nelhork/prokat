@@ -15,8 +15,8 @@ use App\Models\Order;
 use App\Models\ProkatModel;
 use App\Models\Status;
 use App\Models\Stock;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends BaseController
 {
@@ -72,7 +72,6 @@ class OrderController extends BaseController
                 }
             });
         }
-
         $orders = $orderQuery->with(['status', 'giver', 'taker', 'giverStock', 'takerStock', 'client'])->get();
 
         return view('orders.index', compact('orders'));
@@ -127,17 +126,6 @@ class OrderController extends BaseController
         return redirect()->route('orders.index')->with('success', 'Заказ успешно создан!');
     }
 
-//    public function view(Request $request): JsonResponse
-//    {
-//        $order = Order::with('models')->find($request['order_id']);
-//        if (!$order)
-//        {
-//            return $this->sendResponse(true, 'message', 'order not found');
-//        }
-//
-//        return $this->sendResponse(false, 'order', $order);
-//    }
-
     public function update(Order $order, UpdateOrderRequest $request)
     {
         $order->update($request->validated());
@@ -174,7 +162,24 @@ class OrderController extends BaseController
 
     public function view(Order $order)
     {
-        $order->load('models');
+        $models = $order->models;
+        $items = Item::where('stock_id', $order['give_stock_id'])
+            ->whereIn('model_id', $models->select('id'))
+            ->get();
+
+        foreach ($models as $model)
+        {
+            $totalAvailable = $items->where(function (Item $item) use ($model)
+            {
+                return $item['model_id'] === $model['id'];
+
+            })->count();
+            $model['available'] = min($model['pivot']['count'], $totalAvailable);
+
+        }
+
+        $order['models'] = $models;
+
         return view('orders.view', [
             'order' => $order,
             'statuses' => Status::all(),
@@ -197,6 +202,12 @@ class OrderController extends BaseController
                 ->where('model_id', $modelToOrder['model_id'])
                 ->limit($modelToOrder['count'])
                 ->get();
+
+            if ($items->count() < $modelToOrder['count'])
+            {
+                Log::debug('return');
+                return back()->with('message', 'Недостаточно товаров на складе');
+            }
 
             foreach ($items as $item)
             {

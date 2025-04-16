@@ -44,7 +44,7 @@
         <select
             name="{{ $select['name'] }}"
             id="{{ $select['name'] }}"
-            class="form-control"
+            class="form-select"
         >
             @if(isset($select['placeholder']))
                 <option value="">{{ $select['placeholder'] }}</option>

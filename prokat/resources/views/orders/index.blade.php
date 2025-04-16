@@ -89,9 +89,9 @@
                                     <i class="bi bi-pencil"></i></a>
                                 <a class="btn btn-primary" href="{{ route('orders.view', $order) }}">
                                     @if($order['status_id'] === 1)
-                                        Выдать
+                                        Оформить выдачу
                                     @elseif($order['status_id'] === 2)
-                                        Забрать
+                                        Оформить возврат
                                     @else
                                         Посмотреть
                                     @endif

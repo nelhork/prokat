@@ -8,16 +8,16 @@
                 <th scope="col">Комментарий</th>
                 <th scope="col">Название</th>
                 <th scope="col">Тип</th>
-                <th scope="col">Первое фото</th>
+                <th scope="col">Фото</th>
 {{--                <th scope="col">Второе фото</th>--}}
 {{--                <th scope="col">Третье фото</th>--}}
 {{--                <th scope="col">Первое видео</th>--}}
 {{--                <th scope="col">Второе видео</th>--}}
 {{--                <th scope="col">Третье видео</th>--}}
-                <th scope="col">Первое описание</th>
+                <th scope="col">Описание</th>
 {{--                <th scope="col">Второе описание</th>--}}
 {{--                <th scope="col">Третье описание</th>--}}
-                <th scope="col"></th>
+                <th scope="col">Действия</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -27,8 +27,8 @@
                     <td>{{ $model->comment }}</td>
                     <td>{{ $model->name }}</td>
                     <td>{{ $model->type }}</td>
-                    <td>
-                        <img class="img-fluid" style="max-width: 100px" src="{{$model->photo1Url()}}" alt=""/>
+                    <td style="display: flex; justify-content: center">
+                        <img class="img-fluid" style="width: 100px; height: 100px; margin: 3px; object-fit: cover" src="{{$model->photo1Url()}}" alt=""/>
                     </td>
 {{--                    <td>--}}
 {{--                        <img class="img-fluid" style="max-width: 100px" src="{{$model->photo2Url()}}" alt=""/>--}}
