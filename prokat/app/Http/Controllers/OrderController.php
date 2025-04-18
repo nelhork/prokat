@@ -54,24 +54,13 @@ class OrderController extends BaseController
             }
         }
 
-        if ($request->filled('phone1') || $request->filled('phone2') || $request->filled('phone3'))
+        if ($request->filled('phone'))
         {
-            $orderQuery->where(function ($query) use ($request)
-            {
-                if ($request->filled('phone1'))
-                {
-                    $query->orWhere('clients.phone1', $request->phone1);
-                }
-                if ($request->filled('phone2'))
-                {
-                    $query->orWhere('clients.phone2', $request->phone2);
-                }
-                if ($request->filled('phone3'))
-                {
-                    $query->orWhere('clients.phone3', $request->phone3);
-                }
-            });
+            $orderQuery->where('clients.phone1', $request->phone)
+                ->orWhere('clients.phone2', $request->phone)
+                ->orWhere('clients.phone3', $request->phone);
         }
+
         $orders = $orderQuery->with(['status', 'giver', 'taker', 'giverStock', 'takerStock', 'client'])->paginate();
 
         return view('orders.index', compact('orders'));

@@ -7,16 +7,8 @@
         <form method="GET" action="{{ route('orders.index') }}" class="mb-4">
             <div class="row g-1">
                 <div class="col-md-2">
-                    <input type="text" name="phone1" class="form-control" placeholder="Телефон 1"
-                           value="{{ request('phone1') }}">
-                </div>
-                <div class="col-md-2">
-                    <input type="text" name="phone2" class="form-control" placeholder="Телефон 2"
-                           value="{{ request('phone2') }}">
-                </div>
-                <div class="col-md-2">
-                    <input type="text" name="phone3" class="form-control" placeholder="Телефон 3"
-                           value="{{ request('phone3') }}">
+                    <input type="text" name="phone" class="form-control" placeholder="Телефон"
+                           value="{{ request('phone') }}">
                 </div>
                 <div class="col-md-2">
                     <input type="text" name="comment" class="form-control" placeholder="Комментарий"
