@@ -50,6 +50,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('movements.index') }}">Перемещения</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('projects.index') }}">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('income-sources.index') }}">Доходы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('spending-categories.index') }}">Категории расходов</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('accounts.index') }}">Счета</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('transactions.index') }}">Транзакции</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}

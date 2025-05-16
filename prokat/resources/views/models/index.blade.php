@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container py-4 px-3 mx-auto">
+        <h2 class="mb-4">Модели</h2>
         <table class="table">
             <thead>
             <tr>

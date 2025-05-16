@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncomeSourcesController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PriceListController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SpendingCategoryController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
@@ -62,4 +67,28 @@ Route::middleware('auth')->group(function ()
     Route::delete('employees/{employee}',  [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
     Route::get('movements', [MovementController::class, 'index'])->name('movements.index');
+
+    Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('projects/{project}/edit',  [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('projects/{project}',  [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('projects/{project}',  [ProjectController::class, 'destroy'])->name('projects.destroy');
+
+    Route::get('income-sources', [IncomeSourcesController::class, 'index'])->name('income-sources.index');
+    Route::get('income-sources/create', [IncomeSourcesController::class, 'create'])->name('income-sources.create');
+    Route::post('income-sources', [IncomeSourcesController::class, 'store'])->name('income-sources.store');
+    Route::get('income-sources/{source}/edit',  [IncomeSourcesController::class, 'edit'])->name('income-sources.edit');
+    Route::put('income-sources/{source}',  [IncomeSourcesController::class, 'update'])->name('income-sources.update');
+    Route::delete('income-sources/{source}',  [IncomeSourcesController::class, 'destroy'])->name('income-sources.destroy');
+
+    Route::get('spending-categories', [SpendingCategoryController::class, 'index'])->name('spending-categories.index');
+    Route::get('spending-categories/create', [SpendingCategoryController::class, 'create'])->name('spending-categories.create');
+    Route::post('spending-categories', [SpendingCategoryController::class, 'store'])->name('spending-categories.store');
+    Route::get('spending-categories/{category}/edit',  [SpendingCategoryController::class, 'edit'])->name('spending-categories.edit');
+    Route::put('spending-categories/{category}',  [SpendingCategoryController::class, 'update'])->name('spending-categories.update');
+    Route::delete('spending-categories/{category}',  [SpendingCategoryController::class, 'destroy'])->name('spending-categories.destroy');
+
+    Route::resource('accounts', AccountController::class)->except('show');
+    Route::resource('transactions', TransactionController::class)->except('show');
 });

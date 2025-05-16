@@ -33,6 +33,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                    <th>Номер заказа</th>
                     <th>Имя клиента</th>
                     <th>Телефон</th>
                     <th>Статус</th>
@@ -53,6 +54,7 @@
                 <tbody>
                 @foreach($orders as $order)
                     <tr>
+                        <td>{{ $order->id }}</td>
                         <td>{{ $order->client->name }}</td>
                         <td>{{ $order['phone1'] }}</td>
                         <td>{{ $order->status->name }}</td>

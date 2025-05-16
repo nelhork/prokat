@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\TakeOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Account;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Item;
@@ -15,6 +16,7 @@ use App\Models\Order;
 use App\Models\ProkatModel;
 use App\Models\Status;
 use App\Models\Stock;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -214,7 +216,54 @@ class OrderController extends BaseController
             }
         }
 
+        $this->updateAccountsGive($order);
+
         return redirect()->route('orders.index');
+    }
+
+    private function updateAccountsGive($order)
+    {
+        $incomeTran = new Transaction();
+        $incomeTran['type'] = 'доход';
+//      доход = (аренда + депозит) - депозит
+        $incomeTran['amount'] = $order['total_amount'];
+        $incomeTran['comment'] = 'выдача заказа номер ' . $order['id'];
+        $incomeTran['order_id'] = $order['id'];
+        $account = Account::where('name', 'Аренда')->firstOrFail();
+        $incomeTran['primary_account_id'] = $account['id'];
+        $incomeTran->save();
+
+        $incomeTran->execute();
+
+        $moveTran = new Transaction();
+        $moveTran['type'] = 'перемещение';
+//      деньги клиентов = залог
+        $moveTran['amount'] = $order['total_deposit'];
+        $moveTran['comment'] = 'получение залога ' . $order['id'];
+        $moveTran['order_id'] = $order['id'];
+        $primaryAccount = Account::where('name', 'Залоги')->firstOrFail();
+        $secondaryAccount = Account::where('name', 'Деньги клиентов')->firstOrFail();
+        $moveTran['primary_account_id'] = $primaryAccount['id'];
+        $moveTran['secondary_account_id'] = $secondaryAccount['id'];
+        $moveTran->save();
+
+        $moveTran->execute();
+    }
+
+    private function updateAccountsTake($order)
+    {
+        $moveTran = new Transaction();
+        $moveTran['type'] = 'перемещение';
+        $moveTran['amount'] = $order['total_deposit'];
+        $moveTran['comment'] = 'возврат залога ' . $order['id'];
+        $moveTran['order_id'] = $order['id'];
+        $primaryAccount = Account::where('name', 'Деньги клиентов')->firstOrFail();
+        $secondaryAccount = Account::where('name', 'Залоги')->firstOrFail();
+        $moveTran['primary_account_id'] = $primaryAccount['id'];
+        $moveTran['secondary_account_id'] = $secondaryAccount['id'];
+        $moveTran->save();
+
+        $moveTran->execute();
     }
 
     public function take(Order $order)
@@ -245,6 +294,8 @@ class OrderController extends BaseController
                 ]);
             }
         }
+
+        $this->updateAccountsTake($order);
 
         return redirect()->route('orders.index');
     }

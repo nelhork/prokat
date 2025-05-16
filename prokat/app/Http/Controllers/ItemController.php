@@ -7,6 +7,7 @@ use App\Http\Requests\StoreItemRequest;
 use App\Models\Item;
 use App\Models\ProkatModel;
 use App\Models\Stock;
+use Money\Money;
 
 class ItemController extends BaseController
 {
@@ -72,5 +73,7 @@ class ItemController extends BaseController
         $item->delete();
 
         return redirect()->route('items.index');
+
+        $jimPrice = $hannahPrice = Money::RUB(2500);
     }
 }
