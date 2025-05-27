@@ -13,41 +13,27 @@ class Transaction extends Model
 
     public function execute(): void
     {
-        $account = Account::find($this['primary_account_id']);
-        $balance = $account['amount'];
+        $primaryAccount = Account::find($this['primary_account_id']);
         $transactionAmount = $this['amount'];
 
-        if (isset($this['secondary_account_id']))
+        if ($this['type'] == 'доход')
         {
-            $secAccount = Account::find($this['secondary_account_id']);
-            $secBalance = $secAccount['amount'];
-        }
-
-        if ($this['type'] == 'доход' || $this['type'] == 'перемещение')
-        {
-            $result = $balance + $transactionAmount;
-            $account['amount'] = $result;
-            $account->save();
-
-            if (isset($secAccount))
-            {
-                $result = $secBalance - $transactionAmount;
-                $secAccount['amount'] = $result;
-                $secAccount->save();
-            }
+            $primaryAccount['amount'] += $transactionAmount;
+            $primaryAccount->save();
         }
         else if ($this['type'] == 'расход')
         {
-            $result = $balance - ($transactionAmount);
-            $account['amount'] = $result;
-            $account->save();
+            $primaryAccount['amount'] -= $transactionAmount;
+            $primaryAccount->save();
+        }
 
-            if (isset($secAccount))
-            {
-                $result = $secBalance + $transactionAmount;
-                $secAccount['amount'] = $result;
-                $secAccount->save();
-            }
+        if ($this['type'] == 'перемещение') {
+            $primaryAccount['amount'] -= $transactionAmount;
+            $primaryAccount->save();
+
+            $secAccount = Account::find($this['secondary_account_id']);
+            $secAccount['amount'] += $transactionAmount;
+            $secAccount->save();
         }
     }
 

@@ -24,11 +24,11 @@
         $selects = [
             ['name' => 'type', 'label' => 'Тип', 'items' => $types, 'display' => 'name'],
             ['name' => 'primary_account_id', 'label' => 'Основной счет', 'items' => $accounts, 'display' => 'name'],
-            ['name' => 'secondary_account_id', 'label' => 'Дополнительный счет', 'items' => $accounts, 'display' => 'name'],
-            ['name' => 'spending_category_id', 'label' => 'Категория трат', 'items' => $categories, 'display' => 'name'],
-            ['name' => 'income_source_id', 'label' => 'Источник дохода', 'items' => $sources, 'display' => 'name'],
-            ['name' => 'project_id', 'label' => 'Проект', 'items' => $projects, 'display' => 'name'],
-            ['name' => 'order_id', 'label' => 'Заказ', 'items' => $orders, 'display' => 'id'],
+            ['name' => 'secondary_account_id', 'label' => 'Дополнительный счет', 'items' => $accounts, 'display' => 'name', 'placeholder' => 'Не выбрано'],
+            ['name' => 'spending_category_id', 'label' => 'Категория трат', 'items' => $categories, 'display' => 'name', 'placeholder' => 'Не выбрано'],
+            ['name' => 'income_source_id', 'label' => 'Источник дохода', 'items' => $sources, 'display' => 'name', 'placeholder' => 'Не выбрано'],
+            ['name' => 'project_id', 'label' => 'Проект', 'items' => $projects, 'display' => 'name', 'placeholder' => 'Не выбрано'],
+            ['name' => 'order_id', 'label' => 'Заказ', 'items' => $orders, 'display' => 'id', 'placeholder' => 'Не выбрано'],
         ];
     @endphp
 
