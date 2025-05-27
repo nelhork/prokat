@@ -6,6 +6,7 @@ use App\Http\Controllers\Mixins\HasFiles;
 use App\Http\Requests\SearchModelRequest;
 use App\Http\Requests\StoreModel;
 use App\Models\ProkatModel;
+use http\Env\Request;
 
 class ModelController extends BaseController
 {
@@ -26,14 +27,19 @@ class ModelController extends BaseController
         return view('models.create', ['model' => new ProkatModel()]);
     }
 
+    private function storeFile(StoreModel $request, string $key)
+    {
+        return $request->hasFile($key) ? $request[$key]->store('models', 'public') : null;
+    }
+
     public function store(StoreModel $request)
     {
-        $photo1Path = $request['photo1']->store('models', 'public');
-        $photo2Path = $request['photo2']->store('models', 'public');
-        $photo3Path = $request['photo3']->store('models', 'public');
-        $video1Path = $request['video1']->store('models', 'public');
-        $video2Path = $request['video2']->store('models', 'public');
-        $video3Path = $request['video3']->store('models', 'public');
+        $photo1Path = $this->storeFile($request, 'photo1');
+        $photo2Path = $this->storeFile($request, 'photo2');
+        $photo3Path = $this->storeFile($request, 'photo3');
+        $video1Path = $this->storeFile($request, 'video1');
+        $video2Path = $this->storeFile($request, 'video2');
+        $video3Path = $this->storeFile($request, 'video3');
 
         ProkatModel::create([
             'comment' => $request['comment'],

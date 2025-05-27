@@ -22,18 +22,18 @@ class StoreModel extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => 'string|max:255',
+            'comment' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'photo1' => 'image',
-            'photo2' => 'image',
-            'photo3' => 'image',
-            'video1' => 'mimes:mp4,webm',
-            'video2' => 'mimes:mp4,webm',
-            'video3' => 'mimes:mp4,webm',
-            'description1' => 'required|string|max:255',
-            'description2' => 'required|string|max:255',
-            'description3' => 'required|string|max:255'
+            'photo1' => 'nullable|image',
+            'photo2' => 'nullable|image',
+            'photo3' => 'nullable|image',
+            'video1' => 'nullable|mimes:mp4,webm',
+            'video2' => 'nullable|mimes:mp4,webm',
+            'video3' => 'nullable|mimes:mp4,webm',
+            'description1' => 'nullable|string|max:255',
+            'description2' => 'nullable|string|max:255',
+            'description3' => 'nullable|string|max:255'
         ];
     }
 }

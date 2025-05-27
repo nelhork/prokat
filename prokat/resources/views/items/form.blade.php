@@ -50,10 +50,10 @@
                 <option value="">{{ $select['placeholder'] }}</option>
             @endif
 
-            @foreach($select['items'] as $item)
-                <option value="{{ $item['id'] }}"
-                    {{ old($select['name'], $item[$select['name']] ?? '') == $item->id ? 'selected' : '' }}>
-                    {{ $item[$select['display']] }}
+            @foreach($select['items'] as $relation)
+                <option value="{{ $relation['id'] }}"
+                    {{ old($select['name'], $item[$select['name']] ?? '') == $relation['id'] ? 'selected' : '' }}>
+                    {{ $relation[$select['display']] }}
                 </option>
             @endforeach
         </select>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Account;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class StoreTransaction extends FormRequest
 {
@@ -25,11 +27,26 @@ class StoreTransaction extends FormRequest
             'amount' => 'required|numeric',
             'type' => 'required|string|max:255',
             'primary_account_id' => 'required|exists:accounts,id',
-            'secondary_account_id' => 'required|exists:accounts,id|different:primary_account_id',
-            'spending_category_id' => 'required|exists:spending_categories,id',
-            'income_source_id' => 'required|exists:income_sources,id',
-            'project_id' => 'required|exists:projects,id',
-            'order_id' => 'required|exists:orders,id',
+            'secondary_account_id' => [
+                function ($attribute, $value, $fail)
+                {
+                    if ($this->input('type') === 'перемещение')
+                    {
+                        if ($value === $this->input('primary_account_id')) {
+                            $fail('Счета должны быть разными');
+                        }
+
+                        if (!Account::where('id', $value)->exists())
+                        {
+                            $fail('Поле Дополнительный счет не выбрано');
+                        }
+                    }
+                }
+            ],
+            'spending_category_id' => 'nullable|exists:spending_categories,id',
+            'income_source_id' => 'nullable|exists:income_sources,id',
+            'project_id' => 'nullable|exists:projects,id',
+            'order_id' => 'nullable|exists:orders,id',
         ];
     }
 }

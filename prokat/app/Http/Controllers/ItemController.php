@@ -15,7 +15,7 @@ class ItemController extends BaseController
 
     public function __construct()
     {
-        $this->dirname = 'models';
+        $this->dirname = 'items';
     }
 
     public function index()
@@ -30,9 +30,9 @@ class ItemController extends BaseController
 
     public function store(StoreItemRequest $request)
     {
-        $photo1Path = $request['photo1']->store('items', 'public');
-        $photo2Path = $request['photo2']->store('items', 'public');
-        $photo3Path = $request['photo3']->store('items', 'public');
+        $photo1Path = $request->file('photo1') ? $request['photo1']->store('items', 'public') : null;
+        $photo2Path = $request->file('photo2') ? $request['photo2']->store('items', 'public') : null;
+        $photo3Path = $request->file('photo3') ? $request['photo3']->store('items', 'public') : null;
 
         Item::create([
             'comment' => $request['comment'],
