@@ -19,9 +19,42 @@ use Money\Parser\DecimalMoneyParser;
 
 class TransactionController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('transactions.index', ['transactions' => Transaction::paginate()]);
+        $query = Transaction::with('incomeSource', 'primaryAccount', 'secondaryAccount', 'spendingCategory', 'project')
+            ->orderBy('created_at', 'desc');
+        if ($request['type'] !== null)
+        {
+            $query = $query->where('type', $request['type']);
+        }
+
+        if ($request['spending_category_id'])
+        {
+            $query = $query->where('spending_category_id', $request['spending_category_id']);
+        }
+
+        if ($request['account_id'])
+        {
+            $query = $query->where(function($subQuery) use ($request)
+            {
+                $subQuery->where('primary_account_id', $request['account_id'])
+                    ->orWhere('secondary_account_id', $request['account_id']);
+            });
+        }
+
+        if ($request['project_id'])
+        {
+            $query = $query->where('project_id', $request['project_id']);
+        }
+
+        if ($request['income_source_id'])
+        {
+            $query = $query->where('income_source_id', $request['income_source_id']);
+        }
+
+        return view('transactions.index', [
+            'transactions' => $query->paginate()
+        ]);
     }
 
     public function create()

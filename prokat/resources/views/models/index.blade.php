@@ -52,11 +52,16 @@
 {{--                    <td>{{ $model->description3 }}</td>--}}
                     <td>
                         <div class="d-flex gap-1">
-                            <a class="btn btn-primary" href="{{ route('models.edit', ['model' => $model]) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-primary" href="{{ route('models.edit', ['model' => $model]) }}">
+                                <i class="bi bi-pencil"></i>
+                            </a>
                             <form action="{{route('models.destroy', ['model' => $model])}}" method="post">
                                 <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
                                 @method('DELETE')
                             </form>
+                            <a class="btn btn-primary" href="{{ route('models.view', ['model' => $model]) }}">
+                                <i class="bi bi-eye"></i>
+                            </a>
                             <a class="btn btn-secondary"
                                href="{{ route('models.pricelists', ['model' => $model]) }}">
                                 Прайслисты

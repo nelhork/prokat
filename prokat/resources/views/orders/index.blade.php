@@ -18,10 +18,10 @@
                     <input type="text" name="status" class="form-control" placeholder="Статус"
                            value="{{ request('status') }}">
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">Поиск</button>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <a href="{{ route('orders.index') }}" class="btn btn-outline-secondary w-100">Сброс</a>
                 </div>
             </div>
@@ -30,7 +30,7 @@
         @if($orders->isEmpty())
             <p class="text-muted">Нет заказов по заданным условиям</p>
         @else
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover d-none d-xl-table">
                 <thead>
                 <tr>
                     <th>Номер заказа</th>
@@ -96,8 +96,50 @@
                 @endforeach
                 </tbody>
             </table>
+            <ul class="list-group d-xl-none">
+                @foreach($orders as $order)
+                    <li class="list-group-item">
+                        <strong>Номер заказа:</strong> {{ $order->id }}<br>
+                        <strong>Имя клиента:</strong> {{ $order->client->name }}<br>
+                        <strong>Телефон:</strong> {{ $order->phone1 }}<br>
+                        Статус: {{ $order->status->name }}<br>
+                        Дата начала аренды: {{ date("d.m.Y", strtotime($order['begin_at'])) }}<br>
+                        Дата окончания аренды: {{ date("d.m.Y", strtotime($order['end_at'])) }}<br>
+                        Состав заказа:
+                        @if($order->models->isNotEmpty())
+                            @foreach($order['models'] as $model)
+                                <div>{{ $model['name'] }}: {{ $model->pivot->count ?? '?' }}</div>
+                            @endforeach
+                        @else
+                            <span class="text-muted">-</span>
+                        @endif <br>
+                        Примечание: {{ $order['comment'] }}<br>
+                        Цена доставки: {{ $order['delivery_price'] }}<br>
+                        Аренда: {{ $order['total_amount'] }}<br>
+                        Депозит: {{ $order['total_deposit'] }}<br>
+                        Сотрудник выдачи: {{ $order->giver->name }}<br>
+                        Сотрудник приема: {{ $order->taker->name }}<br>
+                        Склад выдачи: {{ $order->giverStock->address }}<br>
+                        Склад приема: {{ $order->takerStock->address }}<br>
+                        Действия:
+                        <div class="d-flex gap-1 justify-content-start mb-2 mt-2">
+                            <a class="btn btn-primary" href="{{ route('orders.edit', $order) }}">
+                                <i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-primary" href="{{ route('orders.view', $order) }}">
+                                @if($order['status_id'] === 1)
+                                    Оформить выдачу
+                                @elseif($order['status_id'] === 2)
+                                    Оформить возврат
+                                @else
+                                    Посмотреть
+                                @endif
+                            </a>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
         @endif
         {{ $orders->links() }}
-        <a class="btn btn-primary" href="{{ route('orders.create') }}">Новый заказ</a>
+        <a class="btn btn-primary mt-xl-2 mt-3" href="{{ route('orders.create') }}">Новый заказ</a>
     </div>
 @endsection

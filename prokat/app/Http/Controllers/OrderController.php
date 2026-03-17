@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Account;
 use App\Models\Client;
 use App\Models\Employee;
+use App\Models\IncomeSource;
 use App\Models\Item;
 use App\Models\ItemStatus;
 use App\Models\ModelToOrder;
@@ -230,6 +231,13 @@ class OrderController extends BaseController
         $incomeTran['order_id'] = $order['id'];
         $account = Account::where('name', 'Аренда')->firstOrFail();
         $incomeTran['primary_account_id'] = $account['id'];
+        $incomeSource = IncomeSource::where('name', 'Розница')->first();
+
+        if ($incomeSource)
+        {
+            $incomeTran['income_source_id'] = $incomeSource['id'];
+        }
+
         $incomeTran->save();
 
         $incomeTran->execute();

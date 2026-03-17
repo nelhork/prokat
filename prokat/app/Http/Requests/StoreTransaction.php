@@ -47,6 +47,7 @@ class StoreTransaction extends FormRequest
             'income_source_id' => 'nullable|exists:income_sources,id',
             'project_id' => 'nullable|exists:projects,id',
             'order_id' => 'nullable|exists:orders,id',
+            'comment' => 'nullable|string'
         ];
     }
 }

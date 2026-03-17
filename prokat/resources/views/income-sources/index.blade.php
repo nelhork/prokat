@@ -6,7 +6,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Название</th>
+                <th scope="col">Источник</th>
                 <th scope="col">Действия</th>
             </tr>
             </thead>

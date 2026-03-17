@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Mixins\HasFiles;
 use App\Http\Requests\SearchModelRequest;
 use App\Http\Requests\StoreModel;
+use App\Models\Item;
+use App\Models\ModelToOrder;
+use App\Models\Order;
 use App\Models\ProkatModel;
-use http\Env\Request;
+use App\Models\Stock;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ModelController extends BaseController
 {
@@ -103,5 +109,34 @@ class ModelController extends BaseController
         return response()->json([
             'models' => ProkatModel::whereRaw("name ilike ?", ['%' . $request['name'] . '%'])->limit(5)->get()
         ]);
+    }
+
+    public function view(Request $request, ProkatModel $model)
+    {
+        $qty = Item::whereIn('stock_id', $request['stocks'] ?? [])
+            ->where('model_id', $model->id)
+            ->count();
+
+        $start = Carbon::now();
+        $end = Carbon::parse($request['date']);
+
+        $orders = Order::whereHas('models', function ($query) use ($model) {
+           $query->where('models.id', $model->id);
+        })->whereBetween('end_at', [$start, $end])
+            ->whereIn('take_stock_id', $request['stocks'] ?? [])
+            ->get();
+
+        //return $orders;
+
+        foreach ($orders as $order)
+        {
+            $returnedModels = ModelToOrder::where('model_id', $model->id)->where('order_id', $order->id)->count();
+            $qty += $returnedModels;
+        }
+
+        $stocks = Stock::select('id', 'name')
+            ->get();
+        //return $request['stocks'];
+        return view('models.view', ['model' => $model, 'qty' => $qty, 'stocks' => $stocks]);
     }
 }

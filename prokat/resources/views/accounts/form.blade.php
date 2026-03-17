@@ -15,7 +15,7 @@
     ])
     @include('components.input', [
         'id' => 'accountAmount',
-        'title' => 'Баланс',
+        'title' => 'Суммма',
         'name' => 'amount',
         'type' => 'number',
         'value' => old('amount', $account['amount'])

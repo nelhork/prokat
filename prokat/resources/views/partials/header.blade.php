@@ -48,6 +48,9 @@
                         <a class="nav-link" href="{{ route('employees.index') }}">Сотрудники</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('leftovers.index') }}">Остатки</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('movements.index') }}">Перемещения</a>
                     </li>
                     <li class="nav-item">
@@ -74,7 +77,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('Выйти') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

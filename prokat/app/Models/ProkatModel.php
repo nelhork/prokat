@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProkatModel extends Model
 {
-    protected string $table = 'models';
+    protected $table = 'models';
     protected $fillable = ['comment', 'name', 'type', 'photo1', 'photo2', 'photo3', 'video1', 'video2', 'video3', 'description1', 'description2', 'description3'];
 
     public function priceLists()

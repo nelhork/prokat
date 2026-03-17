@@ -27,3 +27,17 @@ table th, table td
 {
     justify-content: center;
 }
+
+.table-filters > .btn
+{
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+@media screen and (max-width: 767px)
+{
+    .table-filters .btn
+    {
+        width: 100%;
+    }
+}

@@ -11,7 +11,7 @@
         </div>
     @endif
     <div class="container py-4 px-3 mx-auto">
-        <form action="{{route('transactions.store')}}" method="post" class="needs-validation">
+        <form action="{{ route('transactions.store') }}" method="post" class="needs-validation">
             @include('transactions.form', ['transaction' => $transaction])
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>

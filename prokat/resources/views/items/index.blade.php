@@ -11,6 +11,7 @@
                 <th scope="col">Модель</th>
                 <th scope="col">Склад</th>
                 <th scope="col">Комментарий</th>
+                <th scope="col">Остаток</th>
                 <th scope="col">Действия</th>
             </tr>
             </thead>

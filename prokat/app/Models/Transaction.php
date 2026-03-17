@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Transaction extends Model
 {
@@ -37,4 +39,28 @@ class Transaction extends Model
         }
     }
 
+    public function incomeSource(): BelongsTo
+    {
+        return $this->belongsTo(IncomeSource::class);
+    }
+
+    public function spendingCategory(): BelongsTo
+    {
+        return $this->belongsTo(SpendingCategory::class);
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function primaryAccount(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function secondaryAccount(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

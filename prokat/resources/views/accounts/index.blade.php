@@ -8,7 +8,7 @@
             <tr>
                 <th scope="col">Название</th>
                 <th scope="col">Комментарий</th>
-                <th scope="col">Баланс</th>
+                <th scope="col">Сумма</th>
                 <th scope="col">Создан</th>
                 <th scope="col">Состояние</th>
                 <th scope="col">Действия</th>

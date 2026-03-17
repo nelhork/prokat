@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncomeSourcesController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LeftoverController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\OrderController;
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function ()
     Route::put('models/{model}',  [ModelController::class, 'update'])->name('models.update');
     Route::delete('models/{model}',  [ModelController::class, 'destroy'])->name('models.destroy');
     Route::get('models/search', [ModelController::class, 'search'])->name('models.search');
+    Route::get('models/{model}', [ModelController::class, 'view'])->name('models.view');
 
     Route::get('models/{model}/pricelists', [PriceListController::class, 'index'])->name('models.pricelists');
     Route::get('models/{model}/pricelists/create', [PriceListController::class, 'create'])->name('models.pricelists.create');
@@ -91,4 +93,7 @@ Route::middleware('auth')->group(function ()
 
     Route::resource('accounts', AccountController::class)->except('show');
     Route::resource('transactions', TransactionController::class)->except('show');
+
+    Route::get('leftovers', [LeftoverController::class, 'index'])->name('leftovers.index');
+
 });
