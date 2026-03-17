@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PriceList extends Model
 {
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'model_id',
